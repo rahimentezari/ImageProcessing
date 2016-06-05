@@ -9,21 +9,19 @@
 
 using namespace std;
 using namespace cv;
-
-//char * filename = new char[100];
-//Mat featuresUnclustered;
-//Mat descriptor;
-//Mat input;
-//cv::Mat output;
-//Mat subImg;
-//int SWno ;
-//char * filename = new char[100];
 char filename[80];
 
 int main(){
 cv::Mat frame;
-//VideoCapture cap;
-cv::VideoCapture cap("/home/deep/rahim/Dataset/Eyediap/Data-Gaze/EYEDIAP1/1_A_CS_M/rgb_vga.avi");
+cv::VideoCapture cap("/home/deep/rahim/Dataset/Eyediap/Data-Gaze/EYEDIAP1/1_A_CS_M/rgb_hd.mov");
+/*
+while(cap >> frame){
+   if(frame.empty()){
+      break;
+   }
+   counter++;
+}
+*/
 if(!cap.isOpened()) cout << "Error can't find the file"<<endl;
 else cout << "done";
 
@@ -32,8 +30,9 @@ int i=0;
 while(1){
 if(cap.read(frame))
 	imshow("",frame);
-    sprintf(filename,"/home/deep/cuda-workspace/framing/frames/%05d.jpg",i);
-    imwrite( filename,frame);
+    sprintf(filename,"/home/deep/rahim/Dataset/Eyediap/Data-Gaze/frames/EYEDIAP1/1_A_CS_M/hd/%05d.bmp",i);
+    if (frame.empty()) break;
+    else imwrite( filename,frame);
     cv::waitKey(33);
     i++;
 }
